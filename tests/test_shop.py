@@ -23,8 +23,10 @@ class TestProducts:
         assert product.check_quantity(1001) is False
 
     def test_product_buy(self, product):
-        product.buy(1)
-        assert product.quantity == 999
+        product.buy(5)
+        assert product.quantity == 995
+        product.buy(95)
+        assert product.quantity == 900
 
     def test_product_buy_more_than_available(self, product):
         with pytest.raises(ValueError):
@@ -38,6 +40,8 @@ class TestCart:
         assert cart.products[product] == 1
         cart.add_product(product, 2)
         assert cart.products[product] == 3
+        cart.add_product(product, 45)
+        assert cart.products[product] == 48
 
     def test_remove_product(self, cart, product):
         cart.add_product(product, 3)
